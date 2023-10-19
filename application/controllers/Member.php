@@ -39,7 +39,7 @@ class Member extends CI_Controller
 				redirect('home');
 			}
 		} else {
-			$this->session->set_flashdata('pesan', '<div class="alert alert- danger alert-message" role="alert">Email tidak terdaftar!!</div>');
+			$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-message" role="alert">Email tidak terdaftar!!</div>');
 			redirect('home');
 		}
 	}
@@ -165,7 +165,7 @@ class Member extends CI_Controller
 	{
 		$this->session->unset_userdata('email');
 		$this->session->unset_userdata('role_id');
-		$this->session->set_flashdata('pesan', '<div class="alert alert- success alert-message" role="alert">Anda telah logout!!</div>');
+		$this->session->set_flashdata('pesan', '<div class="alert alert-success alert-message" role="alert">Anda telah logout!!</div>');
 		redirect('/');
 	}
 }
