@@ -9,7 +9,7 @@
 	<link rel="icon" type="image/png" href="<?= base_url('assets/img/logo/'); ?>logo-pb.png">
 	<link href="<?= base_url('assets/'); ?>user/css/bootstrap.css" rel="stylesheet" type="text/css">
 	<link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-	<link href="<?= base_url('assets/'); ?>datatable/datatables.css" rel="stylesheet" type="text/css">
+	<link href="<?= base_url('assets/'); ?>vendor/datatables/datatables.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
