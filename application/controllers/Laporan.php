@@ -32,15 +32,16 @@ class Laporan extends CI_Controller
 
 	public function laporan_buku_pdf()
 	{
-		$data['buku'] = $this->ModelBuku->getBuku()->result_array(); // $this->load->library('dompdf_gen');
-		$sroot = $_SERVER['DOCUMENT_ROOT'];
+		$data['buku'] 		= $this->ModelBuku->getBuku()->result_array(); // $this->load->library('dompdf_gen');
+		$sroot 				= $_SERVER['DOCUMENT_ROOT'];
 		include $sroot . "/pustaka-booking/application/third_party/dompdf/autoload.inc.php";
-		$dompdf = new Dompdf\Dompdf();
-		$this->load->view('buku/laporan_pdf_buku', $data);
-		$paper_size = 'A4'; // ukuran kertas
-		$orientation = 'landscape';
+		$dompdf 			= new Dompdf\Dompdf();
 
-		$html = $this->output->get_output();
+		$this->load->view('buku/laporan_pdf_buku', $data);
+
+		$paper_size 		= 'A4'; // ukuran kertas
+		$orientation 		= 'landscape';
+		$html 				= $this->output->get_output();
 		$dompdf->set_paper($paper_size, $orientation); //Convert to PDF
 		$dompdf->load_html($html);
 		$dompdf->render();
@@ -51,7 +52,7 @@ class Laporan extends CI_Controller
 	{
 		$data = [
 			'title' => 'Laporan Buku',
-			'buku' => $this->ModelBuku->getBuku()->result_array()
+			'buku' 	=> $this->ModelBuku->getBuku()->result_array()
 		];
 
 		$this->load->view('buku/export_excel_buku', $data);

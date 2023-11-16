@@ -25,6 +25,7 @@
 		<center>Laporan Data Buku Perpustakaan Online</center>
 	</h3>
 	<br>
+
 	<table class="table-data">
 		<thead>
 			<tr>
