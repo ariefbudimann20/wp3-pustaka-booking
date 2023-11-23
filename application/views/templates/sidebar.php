@@ -92,7 +92,7 @@
         	<li class="nav-item">
         		<a class="nav-link pb-0" href="<?= base_url('laporan/laporan_peminjam'); ?>">
         			<i class="fa fa-fw fa-address-book"></i>
-        			<span>Laporan Peminjam</span></a>
+        			<span>Laporan Peminjaman</span></a>
         	</li>
 
         	</li>

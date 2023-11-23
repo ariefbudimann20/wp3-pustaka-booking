@@ -29,4 +29,51 @@ class Laporan extends CI_Controller
 
 		$this->load->view('buku/laporan_print_buku', $data);
 	}
+
+	public function laporan_pinjam()
+	{
+		$data['judul'] = 'Laporan Data Peminjaman';
+		$data['user'] = $this->ModelUser->cekData(['email' => $this->session->userdata('email')])->row_array();
+		$data['laporan'] = $this->db->query("select * from pinjam p,detail_pinjam d, buku b,user u where d.id_buku=b.id and p.id_user=u.id and p.no_pinjam=d.no_pinjam")->result_array();
+		$this->load->view('templates/header', $data);
+		$this->load->view('templates/sidebar');
+		$this->load->view('templates/topbar', $data);
+		$this->load->view('pinjam/laporan-pinjam', $data);
+		$this->load->view('templates/footer');
+	}
+
+	public function cetak_laporan_pinjam()
+	{
+		$data['laporan'] = $this->db->query("select * from pinjam p,detail_pinjam d, buku b,user u where d.id_buku=b.id and p.id_user=u.id and p.no_pinjam=d.no_pinjam")->result_array();
+		$this->load->view('pinjam/laporan-print-pinjam', $data);
+	}
+
+	public function laporan_pinjam_pdf()
+	{
+		$data['laporan'] = $this->db->query("select * from pinjam p,detail_pinjam d, buku b,user u where d.id_buku=b.id and p.id_user=u.id and p.no_pinjam=d.no_pinjam")->result_array();
+
+		$sroot = $_SERVER['DOCUMENT_ROOT'];
+		include $sroot . "/pustaka-booking/application/third_party/dompdf/autoload.inc.php";
+		$dompdf = new Dompdf\Dompdf();
+
+		// Generate HTML content using a view
+		$html = $this->load->view('pinjam/laporan_pdf_pinjam', $data, true);
+
+		$paper_size = 'A4'; // ukuran kertas
+		$orientation = 'landscape'; //tipe format kertas potrait atau landscape $html = $this->output->get_output();
+		$dompdf->set_paper($paper_size, $orientation);
+		//Convert to PDF
+		$dompdf->load_html($html);
+		$dompdf->render();
+		$dompdf->stream("laporan data peminjaman.pdf", array('Attachment' => 0));
+	}
+
+	public function export_excel_pinjam()
+	{
+		$data = array(
+			'title' => 'Laporan Data Peminjaman Buku',
+			'laporan' => $this->db->query("select * from pinjam p,detail_pinjam d, buku b,user u where d.id_buku=b.id and p.id_user=u.id and p.no_pinjam=d.no_pinjam")->result_array()
+		);
+		$this->load->view('pinjam/export-excel-pinjam', $data);
+	}
 }
